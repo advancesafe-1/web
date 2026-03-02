@@ -1206,6 +1206,8 @@
     .blog-article__content li { margin: 6px 0; padding-left: 4px; }
     .blog-article__content strong,
     .blog-article__content .blog-article__strong { color: var(--text); font-weight: 700; }
+    .legal-content a { color: var(--accent); text-decoration: none; }
+    .legal-content a:hover { text-decoration: underline; }
     .blog-faq { margin-top: 48px; }
     .blog-faq__title {
       font-family: var(--font-heading);
