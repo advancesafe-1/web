@@ -9,6 +9,13 @@ import ROI from './components/ROI';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import SchemaMarkup from './components/SchemaMarkup';
+import {
+  StatsSection,
+  WhatIsSection,
+  IndustriesSection,
+  HomepageFAQ,
+} from './components/HomepageSEO';
 
 function useScrollProgress() {
   const [progress, setProgress] = useState(0);
@@ -115,13 +122,18 @@ export default function App() {
         <div className="noise" aria-hidden="true" />
         <Header />
         <main id="main-content">
+          <SchemaMarkup />
           <Hero />
+          <StatsSection />
+          <WhatIsSection />
           <Pillars />
           <HowItWorks />
           <Features />
           <WhyAdvanceSafe />
           <ROI />
           <About />
+          <IndustriesSection />
+          <HomepageFAQ />
           <Contact />
         </main>
         <Footer />

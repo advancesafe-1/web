@@ -1,7 +1,6 @@
 const features = [
   { title: 'AI Predictive Alerts', desc: 'Detects risk 30–120 minutes before critical, across 350+ sensor triggers', icon: 'default' },
   { title: 'Live Plant Floor Map', desc: 'Real-time 2D visualization of every zone, worker, and sensor — color coded green, amber, red', icon: 'rect' },
-  { title: 'Worker SOS App', desc: 'Every worker carries a personal SOS button. GPS, audio, and identity sent to control room in under 2 seconds', icon: 'phone' },
   { title: 'PPE Detection', desc: 'Computer vision detects missing helmets, vests, and gloves — with 80% fewer false alerts than standard systems', icon: 'ppe' },
   { title: 'Immutable Audit Trail', desc: 'Every event logged, timestamped, and locked. Cannot be edited. Legally defensible.', icon: 'audit' },
   { title: 'One-Click Compliance Reports', desc: 'Factory Act reports generated automatically. No manual compilation.', icon: 'report' },
@@ -16,9 +15,6 @@ function FeatureIcon({ type }) {
   const w = 28; const h = 28;
   if (type === 'rect') return (
     <svg width={w} height={h} viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="16" rx="2" stroke={stroke} strokeWidth="1.5" fill="none"/><path d="M4 12h20M10 6v16M18 6v16" stroke={stroke} strokeWidth="1.5"/></svg>
-  );
-  if (type === 'phone') return (
-    <svg width={w} height={h} viewBox="0 0 28 28" fill="none"><rect x="6" y="4" width="16" height="22" rx="2" stroke={stroke} strokeWidth="1.5" fill="none"/><circle cx="14" cy="18" r="2" stroke={stroke} strokeWidth="1.5" fill="none"/><path d="M10 10h8" stroke={stroke} strokeWidth="1.5" strokeLinecap="round"/></svg>
   );
   if (type === 'ppe') return (
     <svg width={w} height={h} viewBox="0 0 28 28" fill="none"><circle cx="14" cy="12" r="6" stroke={stroke} strokeWidth="1.5" fill="none"/><path d="M8 22c0-3.5 2.5-6 6-6s6 2.5 6 6" stroke={stroke} strokeWidth="1.5" strokeLinecap="round"/><path d="M14 8v2M14 16v2M10 12h2M16 12h2" stroke={stroke} strokeWidth="1.5" strokeLinecap="round"/></svg>
