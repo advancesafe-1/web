@@ -19,7 +19,7 @@ export default function BlogPage() {
     if (meta)
       meta.setAttribute(
         'content',
-        'Expert articles on industrial safety management, ISO 45001, OSHA compliance, workplace hazard prevention, EHS best practices, and safety technology for industries worldwide.'
+        'Expert articles on industrial safety management, ISO 45001, Indian safety regulations (Factories Act, BOCW, DGFASLI), workplace hazard prevention, EHS best practices, and safety technology for industries.'
       );
   }, []);
 
@@ -53,6 +53,9 @@ export default function BlogPage() {
       </section>
 
       <div className="blog-content">
+        <p className="blog-disclaimer" role="note">
+          <strong>Disclaimer:</strong> This blog is for general information and educational purposes only. Articles may reference industry practices and standards; we do not guarantee the accuracy or completeness of any statistics or third-party data. For compliance and safety decisions, consult qualified professionals and official regulations.
+        </p>
         <section className="blog-section">
           <h2 className="blog-section__label">Featured Articles</h2>
           <div className="blog-grid-featured">

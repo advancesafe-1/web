@@ -118,6 +118,10 @@ export default function BlogPostPage() {
           </div>
         )}
 
+        <p className="blog-disclaimer" role="note" style={{ marginTop: '2rem' }}>
+          <strong>Disclaimer:</strong> This article is for general information and educational purposes only. Statistics or third-party data mentioned are not independently verified by AdvanceSafe. For compliance and safety decisions, consult qualified professionals and official regulations.
+        </p>
+
         <div className="blog-article-cta">
           <h3 className="blog-article-cta__title">
             Ready to Transform Your Safety Management?

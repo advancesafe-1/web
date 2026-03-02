@@ -13,7 +13,7 @@ export default function SchemaMarkup() {
       url: 'https://www.advancesafe.in',
       logo: 'https://www.advancesafe.in/logo.png',
       description:
-        "AdvanceSafe is India's leading Industrial Safety Management System providing ISO 45001 compliance, safety audits, incident reporting, and EHS management for industries worldwide.",
+        "AdvanceSafe is India's leading Industrial Safety Management System built to support ISO 45001 compliance and aligned with Indian safety regulations. Safety audits, incident reporting, and EHS management for industries worldwide.",
       foundingDate: '2020',
       address: {
         '@type': 'PostalAddress',
@@ -41,21 +41,15 @@ export default function SchemaMarkup() {
       operatingSystem: 'Web, iOS, Android',
       url: 'https://www.advancesafe.in',
       description:
-        'A comprehensive industrial safety management platform for ISO 45001 compliance, safety audits, incident reporting, risk assessment, and EHS management.',
+        'A comprehensive industrial safety management platform built to support ISO 45001 compliance, safety audits, incident reporting, risk assessment, and EHS management. Aligned with Indian regulations including Factories Act 1948 and DGFASLI.',
       offers: {
         '@type': 'Offer',
         price: '0',
         priceCurrency: 'INR',
         description: 'Contact for pricing',
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '150',
-        bestRating: '5',
-      },
       featureList: [
-        'ISO 45001 Compliance Management',
+        'ISO 45001-Ready Compliance Management',
         'Digital Safety Audit Checklists',
         'Incident Reporting & Investigation',
         'Risk Assessment & HIRA',
@@ -96,7 +90,7 @@ export default function SchemaMarkup() {
           name: 'What is ISO 45001 and why is it important for industry safety?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'ISO 45001 is the international standard for Occupational Health and Safety Management Systems. It helps organizations proactively improve safety performance, prevent injuries and illnesses, and comply with legal requirements. Over 400,000 organizations worldwide are certified to ISO 45001.',
+            text: 'ISO 45001 is the international standard for Occupational Health and Safety Management Systems. It helps organizations proactively improve safety performance, prevent injuries and illnesses, and comply with legal requirements. Many organizations worldwide are certified to ISO 45001.',
           },
         },
         {
@@ -104,7 +98,7 @@ export default function SchemaMarkup() {
           name: 'What is the best industrial safety management software?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'AdvanceSafe is one of the leading industrial safety management platforms in India, offering ISO 45001 compliance, digital safety audits, incident reporting, risk assessment, and EHS dashboards — all in a single integrated platform trusted by 500+ industries.',
+            text: 'AdvanceSafe is one of the leading industrial safety management platforms in India, built to support ISO 45001 compliance with digital safety audits, incident reporting, risk assessment, and EHS dashboards — for teams in manufacturing, construction and chemical industries.',
           },
         },
         {
@@ -112,7 +106,7 @@ export default function SchemaMarkup() {
           name: 'How does AdvanceSafe help with industry safety compliance?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'AdvanceSafe automates the entire safety compliance lifecycle — from hazard identification and risk assessments to safety audits, incident investigation, corrective actions, and ISO 45001 documentation. It reduces manual paperwork by 80% and helps industries achieve zero-accident targets.',
+            text: 'AdvanceSafe automates the entire safety compliance lifecycle — from hazard identification and risk assessments to safety audits, incident investigation, corrective actions, and ISO 45001 documentation. It helps reduce manual paperwork and supports industries in working toward zero-accident targets.',
           },
         },
         {

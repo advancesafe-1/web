@@ -1245,3 +1245,15 @@
     .blog-not-found__title { font-size: 32px; color: var(--text); }
     .blog-not-found__back { color: var(--accent); font-weight: 700; text-decoration: none; }
     .blog-not-found__back:hover { text-decoration: underline; }
+    .blog-disclaimer {
+      font-size: 0.8125rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding: var(--space-4) var(--space-5);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-4);
+    }
+    .blog-disclaimer strong { color: var(--text-secondary); font-weight: 600; }

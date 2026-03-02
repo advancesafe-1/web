@@ -33,7 +33,7 @@ export const blogPosts = [
     slug: 'digital-safety-audit-checklist',
     title: 'How to Conduct a Digital Safety Audit: Step-by-Step Checklist',
     excerpt:
-      'Traditional paper-based safety audits are slow, error-prone, and hard to track. Discover how digital safety audits transform your compliance process and save 80% of audit time.',
+      'Traditional paper-based safety audits are slow, error-prone, and hard to track. Discover how digital safety audits transform your compliance process and save audit time.',
     category: 'Safety Audits',
     categoryColor: '#FFB700',
     author: 'AdvanceSafe Team',
@@ -111,7 +111,7 @@ At its core, industry safety is about **preventing accidents before they happen*
 
 ## Why Industry Safety Matters
 
-Every year, approximately **2.3 million workers worldwide** die from work-related accidents or diseases (ILO data). For every fatal accident, there are an estimated 600 near-miss incidents that go unreported.
+Work-related accidents and diseases remain a major cause of injury and loss of life globally. Many serious incidents are preceded by unreported near-misses.
 
 The cost of poor industry safety is enormous:
 - **Direct costs**: Medical treatment, compensation, equipment damage
@@ -137,16 +137,19 @@ Every incident, near-miss, and unsafe condition must be reported, investigated, 
 
 ## Industry Safety Standards & Regulations
 
-| Standard | Scope | Region |
-|----------|-------|--------|
-| ISO 45001 | Occupational Health & Safety Management System | Global |
-| OSHA 29 CFR | Occupational Safety & Health | USA |
+AdvanceSafe supports compliance with Indian safety regulations and global standards:
+
+| Standard / Regulation | Scope | Region |
+|-----------------------|-------|--------|
 | Factories Act 1948 | Factory worker safety | India |
+| BOCW Act | Building and construction workers | India |
+| DGFASLI guidelines | Industrial safety | India |
+| ISO 45001 | Occupational Health & Safety Management System | Global |
 | HSE Standards | Health & Safety | UK/Europe |
 
 ## How AdvanceSafe Supports Industry Safety
 
-AdvanceSafe provides a digital platform that covers every aspect of industrial safety management — from hazard identification and risk assessments to safety audits, incident investigation, training management, and ISO 45001 compliance.
+AdvanceSafe provides a digital platform built to support ISO 45001 compliance and aligned with Indian regulations — from hazard identification and risk assessments to safety audits, incident investigation, training management, and compliance documentation.
 
 ## Frequently Asked Questions
 
@@ -154,7 +157,7 @@ AdvanceSafe provides a digital platform that covers every aspect of industrial s
 A: Safety focuses on preventing accidents and injuries (immediate physical hazards), while occupational health addresses longer-term health impacts from work conditions like noise, chemicals, or ergonomic stress.
 
 **Q: What is the most important element of an industrial safety program?**
-A: Leadership commitment. Research consistently shows that organizations where top management visibly prioritizes safety achieve 5x better safety outcomes than those that treat it as a compliance checkbox.
+A: Leadership commitment. Research consistently shows that organizations where top management visibly prioritizes safety achieve significantly better safety outcomes than those that treat it as a compliance checkbox.
 
 **Q: How do I get ISO 45001 certified?**
 A: ISO 45001 certification involves implementing a compliant occupational health and safety management system, then undergoing a third-party audit by an accredited certification body. AdvanceSafe helps organizations manage the entire ISO 45001 compliance process digitally.
@@ -192,7 +195,7 @@ A: ISO 45001 certification involves implementing a compliant occupational health
 
 ISO 45001:2018 is the international standard for Occupational Health and Safety (OH&S) Management Systems. Published by the International Organization for Standardization (ISO), it replaced the earlier OHSAS 18001 standard and is now the global benchmark for workplace safety management.
 
-Over **400,000 organizations** in 130+ countries are certified to ISO 45001.
+Many organizations worldwide are certified to ISO 45001.
 
 ## ISO 45001 Key Requirements
 
@@ -231,7 +234,7 @@ Report incidents, address nonconformities, and continually improve the OH&S syst
 
 ## How AdvanceSafe Simplifies ISO 45001
 
-AdvanceSafe is purpose-built for ISO 45001 compliance, with modules that map directly to every clause requirement — reducing certification preparation time by up to 60%.
+AdvanceSafe is built to support ISO 45001 compliance, with modules that map directly to every clause requirement — helping reduce certification preparation time.
     `,
     faq: [
       {

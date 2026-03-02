@@ -1,7 +1,7 @@
 const features = [
-  { title: 'AI Predictive Alerts', desc: 'Detects risk 30–120 minutes before critical, across 350+ sensor triggers', icon: 'default' },
+  { title: 'AI Predictive Alerts', desc: 'Detects risk before it becomes critical, across your connected sensors and cameras', icon: 'default' },
   { title: 'Live Plant Floor Map', desc: 'Real-time 2D visualization of every zone, worker, and sensor — color coded green, amber, red', icon: 'rect' },
-  { title: 'PPE Detection', desc: 'Computer vision detects missing helmets, vests, and gloves — with 80% fewer false alerts than standard systems', icon: 'ppe' },
+  { title: 'PPE Detection', desc: 'Computer vision detects missing helmets, vests, and gloves — with fewer false alerts than standard systems', icon: 'ppe' },
   { title: 'Immutable Audit Trail', desc: 'Every event logged, timestamped, and locked. Cannot be edited. Legally defensible.', icon: 'audit' },
   { title: 'One-Click Compliance Reports', desc: 'Factory Act reports generated automatically. No manual compilation.', icon: 'report' },
   { title: 'Smart Alert Escalation', desc: 'Alert goes Supervisor → Manager → Plant Head → Emergency Services automatically if unacknowledged', icon: 'alert' },

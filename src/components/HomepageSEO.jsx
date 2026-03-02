@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 export function StatsSection() {
   const stats = [
-    { value: 'ISO 45001', label: 'Fully Compliant', icon: '🛡️' },
-    { value: 'Up to 80%', label: 'Audit Time Saved', icon: '⚡' },
+    { value: 'ISO 45001-Ready', label: 'Aligned with ISO 45001:2018', icon: '🛡️' },
+    { value: 'Faster', label: 'Audit Time Saved', icon: '⚡' },
     { value: 'Target', label: 'Give Alert Before Accident', icon: '🎯' },
   ];
 
@@ -23,7 +23,7 @@ export function StatsSection() {
           whiteSpace: 'nowrap',
         }}
       >
-        Industrial Safety Management Platform Trusted by 500+ Industries
+        Industrial Safety Management Platform — Trusted by growing industries across India
       </h2>
       <div
         style={{
@@ -80,7 +80,7 @@ export function WhatIsSection() {
             <strong>AdvanceSafe</strong> is an{' '}
             <strong>industrial safety management platform</strong> that helps manufacturing
             plants, construction sites, chemical facilities, and all industrial operations
-            achieve <strong>ISO 45001 compliance</strong>, eliminate workplace hazards, and build
+            work toward <strong>ISO 45001 compliance</strong>, eliminate workplace hazards, and build
             a proactive safety culture — all from a single digital platform.
           </p>
           <p className="homepage-seo-section__text" style={{ fontSize: '16px', lineHeight: 1.8, marginBottom: '32px' }}>
@@ -100,7 +100,7 @@ export function WhatIsSection() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           {[
-            { icon: '✅', title: 'ISO 45001 Compliance', desc: 'Automate compliance documentation and audit readiness' },
+            { icon: '✅', title: 'ISO 45001-Ready', desc: 'Built to support ISO 45001 compliance and audit readiness' },
             { icon: '🔍', title: 'Safety Audits', desc: 'Digital checklists with real-time reporting and analytics' },
             { icon: '🚨', title: 'Incident Management', desc: 'Rapid reporting, investigation and CAPA tracking' },
             { icon: '⚠️', title: 'Risk Assessment', desc: 'HIRA methodology with risk matrix and controls' },
@@ -168,10 +168,10 @@ export function IndustriesSection() {
 export function HomepageFAQ() {
   const faqs = [
     { q: 'What is an Industrial Safety Management System?', a: 'An Industrial Safety Management System (ISMS) is a structured digital platform that helps organizations identify hazards, assess risks, conduct safety audits, report incidents, manage ISO 45001 compliance, and track EHS performance — all in one place. AdvanceSafe provides a complete ISMS for industries of all sizes.' },
-    { q: 'How does AdvanceSafe help with industry safety?', a: 'AdvanceSafe automates the entire safety compliance lifecycle — from hazard identification and HIRA risk assessments to digital safety audits, real-time incident reporting, corrective action tracking, and ISO 45001 documentation. It reduces manual safety work by 80% and helps industries achieve zero-accident targets.' },
-    { q: 'Is AdvanceSafe ISO 45001 compliant?', a: 'Yes. AdvanceSafe is specifically designed to support ISO 45001:2018 (Occupational Health & Safety Management Systems) compliance. All modules, documentation, and workflows are aligned with ISO 45001 clause requirements.' },
+    { q: 'How does AdvanceSafe help with industry safety?', a: 'AdvanceSafe automates the entire safety compliance lifecycle — from hazard identification and HIRA risk assessments to digital safety audits, real-time incident reporting, corrective action tracking, and ISO 45001 documentation. It helps reduce manual safety work and supports industries in working toward zero-accident targets.' },
+    { q: 'Does AdvanceSafe support ISO 45001?', a: 'Yes. AdvanceSafe is built to support and aligned with ISO 45001:2018 (Occupational Health & Safety Management Systems) requirements. All modules, documentation, and workflows are designed to help your organization achieve ISO 45001 compliance.' },
     { q: 'Which industries can use AdvanceSafe?', a: 'AdvanceSafe is suitable for manufacturing, construction, chemical & petrochemical, oil & gas, pharmaceutical, power & utilities, warehousing, ports, and any industrial operation that requires formal safety management and compliance.' },
-    { q: 'How is AdvanceSafe different from other safety management software?', a: 'AdvanceSafe is built specifically for Indian industrial requirements while meeting global standards like ISO 45001 and OSHA. It offers a complete end-to-end platform — not just a checklist tool — with modules for audits, incidents, risk assessment, training, permits, and executive dashboards.' },
+    { q: 'How is AdvanceSafe different from other safety management software?', a: 'AdvanceSafe is built for Indian industrial requirements first — compliant with Factories Act 1948, BOCW Act, DGFASLI and aligned with global standards like ISO 45001. It offers a complete end-to-end platform — not just a checklist tool — with modules for audits, incidents, risk assessment, training, permits, and executive dashboards.' },
     { q: 'Can AdvanceSafe be used on mobile devices?', a: 'Yes. AdvanceSafe is accessible on web, iOS, and Android devices, enabling safety officers to conduct audits, report incidents, and complete inspections directly from the factory floor using their smartphone or tablet.' },
   ];
 
