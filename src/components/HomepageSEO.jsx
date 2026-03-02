@@ -172,7 +172,8 @@ export function HomepageFAQ() {
     { q: 'Does AdvanceSafe support ISO 45001?', a: 'Yes. AdvanceSafe is built to support and aligned with ISO 45001:2018 (Occupational Health & Safety Management Systems) requirements. All modules, documentation, and workflows are designed to help your organization achieve ISO 45001 compliance.' },
     { q: 'Which industries can use AdvanceSafe?', a: 'AdvanceSafe is suitable for manufacturing, construction, chemical & petrochemical, oil & gas, pharmaceutical, power & utilities, warehousing, ports, and any industrial operation that requires formal safety management and compliance.' },
     { q: 'How is AdvanceSafe different from other safety management software?', a: 'AdvanceSafe is built for Indian industrial requirements first — compliant with Factories Act 1948, BOCW Act, DGFASLI and aligned with global standards like ISO 45001. It offers a complete end-to-end platform — not just a checklist tool — with modules for audits, incidents, risk assessment, training, permits, and executive dashboards.' },
-    { q: 'Can AdvanceSafe be used on mobile devices?', a: 'Yes. AdvanceSafe is accessible on web, iOS, and Android devices, enabling safety officers to conduct audits, report incidents, and complete inspections directly from the factory floor using their smartphone or tablet.' },
+    { q: 'Can AdvanceSafe work offline?', a: 'Yes. AdvanceSafe can work offline so your teams can use it in areas with limited or no connectivity, with data syncing when the connection is available. When there is a network issue, our software keeps working — it continues analysing and gives alerts to the admin or security staff.' },
+    { q: 'What about company private data?', a: 'We do not take or store your company’s private data on our servers. For privacy, your data stays with you — we store it locally in your plant only.' },
   ];
 
   return (
