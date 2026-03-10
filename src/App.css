@@ -49,10 +49,9 @@
     *, *::before, *::after { box-sizing: border-box; }
     html {
       scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
     }
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; scroll-snap-type: none; }
+      html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
     body {
@@ -122,16 +121,12 @@
     .parallax-layer--glow { z-index: 0; }
     main { position: relative; z-index: 2; }
 
-    /* Scroll-snap sections (reel-like) */
+    /* Section spacing for anchor links / focus */
     section {
-      scroll-snap-align: start;
       scroll-margin-top: 0;
     }
     section#hero {
       scroll-margin-top: 4.5rem;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      section { scroll-snap-align: none; }
     }
 
     /* Scroll-triggered reveal */
