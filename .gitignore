@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Local env
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Nested duplicate folder (accidental copy inside this repo)
+/web-main/
+
+# OS
+.DS_Store
+Thumbs.db
