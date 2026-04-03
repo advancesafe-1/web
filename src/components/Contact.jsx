@@ -103,26 +103,41 @@ export default function Contact() {
       return;
     }
 
+    const payload = {
+      source: 'advancesafe.in',
+      name: nameVal,
+      designation: designationVal,
+      company: companyVal,
+      industry: industryVal,
+      phone: phoneVal,
+      city: cityVal,
+      email: emailVal || undefined,
+      workers: (formData.workers || '').trim(),
+      message: messageVal,
+    };
+
     setSubmitting(true);
     try {
+      /* no-cors: only simple Content-Types are allowed; use text/plain + JSON string so the body is sent and Apps Script can parse e.postData.contents */
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: JSON.stringify({
-          name: nameVal,
-          company: companyVal,
-          industry: industryVal,
-          phone: phoneVal,
-          city: cityVal,
-          message: messageVal,
-        }),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
       });
       // With no-cors we can't read the response; treat sent-without-throw as success.
       incrementRateLimit();
       setFeedback({ msg: 'Demo request submitted successfully!', isError: false });
       setFormData({ name: '', designation: '', company: '', industry: '', city: '', phone: '', email: '', workers: '', message: '', _gotcha: '' });
     } catch (error) {
-      setFeedback({ msg: 'Submission failed.', isError: true });
+      /* Often CSP (connect-src) or offline; Apps Script may still have run — don't imply hard failure */
+      setFeedback({
+        msg:
+          'We could not confirm from your browser (often a security policy block). If you already received an email, your request went through. Otherwise try again or call +91 95868 68538.',
+        isError: true,
+      });
       console.error(error);
     } finally {
       setSubmitting(false);
