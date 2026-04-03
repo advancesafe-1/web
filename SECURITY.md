@@ -1,41 +1,66 @@
 # Security — AdvanceSafe Web App
 
-This is a **Vite + React** SPA (not Next.js). Security headers are set at **deploy time** via `vercel.json` (Vercel) or `public/_headers` (Netlify).
+This is a **Vite + React** SPA. Security headers are applied at the **edge** via `vercel.json` (Vercel) or `public/_headers` (Netlify). **Do not commit secrets**; use `VITE_` only for public configuration.
 
 ---
 
-## ✅ Implemented
+## Implemented controls
 
-| Control | Where |
-|--------|--------|
-| **Security headers** | `vercel.json` and `public/_headers`: HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-XSS-Protection, Content-Security-Policy |
-| **HTTPS** | Enforced via Strict-Transport-Security header; host over HTTPS only |
-| **security.txt** | `public/.well-known/security.txt` — researchers can report issues to security@advancesafe.in |
-| **XSS** | React escapes output; no unsafe `dangerouslySetInnerHTML` on user input |
-| **Secrets** | `.env` and `.env.*.local` in `.gitignore`; no API secrets in repo. **Only use `VITE_` prefix for non-sensitive, public config** (e.g. `VITE_SITE_URL`). Server secrets must stay on the server (e.g. in Google Apps Script, not in client code). |
-| **Form** | Honeypot, client-side validation, `maxLength` on inputs. Client-side rate limit (sessionStorage) for UX; **server-side rate limiting must be in your form backend** (e.g. Google Apps Script). |
-| **Dependencies** | Run `npm audit` regularly; fix high/critical. Dependabot recommended. |
-
----
-
-## 🔴 Do next (priority)
-
-1. **Headers** — Deploy so that your host uses the headers in `vercel.json` (Vercel) or copies `public/_headers` (Netlify). For other hosts (Apache/Nginx), copy the same header names and values into server config.
-2. **Rate limiting** — Add **server-side** rate limiting (and optionally CAPTCHA) in the backend that receives the contact/demo form (e.g. Google Apps Script or future API). Client-side limits can be bypassed.
-3. **Env review** — If you add `.env`, never put secrets in variables that start with `VITE_`; they are bundled into the client.
-4. **SSL** — If not on Vercel/Netlify, set a reminder to renew SSL before expiry (e.g. UptimeRobot for monitoring).
+| Control | Details |
+|--------|---------|
+| **HTTPS + HSTS** | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload` |
+| **Clickjacking** | `X-Frame-Options: DENY` and CSP `frame-ancestors 'none'` |
+| **MIME sniffing** | `X-Content-Type-Options: nosniff` |
+| **Referrer** | `Referrer-Policy: strict-origin-when-cross-origin` |
+| **Feature policy** | `Permissions-Policy` restricts camera, mic, geolocation, browsing-topics, payment, interest-cohort |
+| **CSP** | See below; `object-src 'none'`; `upgrade-insecure-requests` |
+| **XSS (baseline)** | React escapes text; JSON-LD uses `serializeJsonLd()` to escape `<` in inline scripts |
+| **Analytics** | GA4 via gtag; init in `/gtag-init.js` (same-origin) so inline bootstrap is not required. Do not send PII in custom dimensions. |
+| **Forms** | Honeypot field, client validation, sanitization of free-text fields, optional reCAPTCHA v3, sessionStorage rate limit (UX only) |
+| **security.txt** | `public/.well-known/security.txt` |
 
 ---
 
-## 🟠 Recommended (this month)
+## Content-Security-Policy (summary)
 
-- **Cookie consent** — For DPDPA 2023 (India), add a cookie/consent banner if you use non-essential cookies or analytics before consent.
-- **CAPTCHA** — Add reCAPTCHA v3 (or similar) to contact/demo forms and verify the token on the server before accepting the submission.
-- **Uptime + SSL monitoring** — e.g. UptimeRobot (free) for uptime and SSL expiry.
-- **WAF** — Cloudflare (or similar) in front of the site for DDoS and common attacks.
+- **Scripts:** `'self'`, `'unsafe-inline'` (required for React-rendered JSON-LD `<script type="application/ld+json">`), Google tag manager / analytics, reCAPTCHA loader paths.
+- **No `unsafe-eval`** in production headers (Vite production build does not rely on `eval`).
+- **Styles:** `'self'`, `'unsafe-inline'`, `https://fonts.googleapis.com` (inline styles from React and Google Fonts CSS).
+- **Fonts:** `'self'`, `https://fonts.gstatic.com`, `data:` (some UI fonts load as data URIs).
+- **Images:** `'self'`, `data:`, `https:`.
+- **Connect:** Analytics, Google Apps Script, Formspree (if used), Google endpoints for reCAPTCHA/GA as needed.
+- **Frames:** reCAPTCHA domains only where needed.
+- **SEO / crawlers:** CSP does not block bots; `robots` meta remains `index, follow`. Googlebot does not execute form spam; no change to crawlability.
+
+Tightening further (e.g. **nonces** for every script) would require server-side HTML rewriting or a framework with SSR.
 
 ---
 
-## Security contact
+## Contact / demo form
 
-Report vulnerabilities to **security@advancesafe.in**. See `https://www.advancesafe.in/.well-known/security.txt` for details.
+1. **Client:** Validation, control-character stripping, worker-count pattern, honeypot, optional **reCAPTCHA v3** when `VITE_RECAPTCHA_SITE_KEY` is set.
+2. **Server (required for enterprise):** Implement **rate limiting**, **reCAPTCHA secret verification**, and duplicate detection in **Google Apps Script** (or a future API). Client checks are **not** sufficient on their own.
+3. **reCAPTCHA:** Add the site key to `.env` as `VITE_RECAPTCHA_SITE_KEY`. Store the **secret** only in Apps Script properties. Reject submissions when the token is missing, invalid, or score is below your threshold.
+
+---
+
+## Dependency hygiene
+
+```bash
+npm audit
+npm audit fix
+```
+
+Use **Dependabot** or **Renovate** on the repo. Address **high/critical** findings promptly.
+
+---
+
+## Authentication
+
+There is **no user login** in this marketing site. If you add an app with sessions, prefer **httpOnly, Secure, SameSite** cookies over localStorage tokens.
+
+---
+
+## Reporting
+
+Report vulnerabilities to **security@advancesafe.in**. See `https://www.advancesafe.in/.well-known/security.txt`.

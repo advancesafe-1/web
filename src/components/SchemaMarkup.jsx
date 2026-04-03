@@ -3,6 +3,8 @@
 // Import and render in App (or layout) so it appears on every page.
 // ============================================================
 
+import { serializeJsonLd } from '../lib/jsonLd';
+
 export default function SchemaMarkup() {
   const schemas = [
     {
@@ -161,7 +163,7 @@ export default function SchemaMarkup() {
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
         />
       ))}
     </>
@@ -201,7 +203,7 @@ export function BlogPostSchema({ post }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   );
 }

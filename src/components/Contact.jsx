@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import { getRecaptchaToken, isRecaptchaConfigured } from '../lib/recaptcha';
 
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-3mL7MaTGoi64eD9iWowCvlGvdSE3xNl0yBlwOzcsgcx7exMt2XTWWVJRc8yBt6yi8A/exec';
 const RATE_LIMIT_COUNT = 3; // Client-side only; enforce server-side rate limit in Apps Script
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const nameRe = /^[\p{L}\p{M}\s\-']+$/u;
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Strip disallowed control characters from free-text fields */
+const workersRe = /^[\d\s\-–—+,\.~]+$/u;
+
+function stripControlChars(s) {
+  return (s || '').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '');
+}
 
 function getRateLimit() {
   try {
@@ -78,14 +85,15 @@ export default function Contact() {
       return;
     }
 
-    const nameVal = (formData.name || '').trim();
-    const companyVal = (formData.company || '').trim();
-    const phoneVal = (formData.phone || '').trim();
-    const emailVal = (formData.email || '').trim();
+    const nameVal = stripControlChars(formData.name || '').trim();
+    const companyVal = stripControlChars(formData.company || '').trim();
+    const phoneVal = stripControlChars(formData.phone || '').trim();
+    const emailVal = stripControlChars(formData.email || '').trim();
     const designationVal = (formData.designation || '').trim();
     const industryVal = (formData.industry || '').trim();
-    const cityVal = (formData.city || '').trim();
-    const messageVal = (formData.message || '').trim();
+    const cityVal = stripControlChars(formData.city || '').trim();
+    const messageVal = stripControlChars(formData.message || '').trim().slice(0, 1000);
+    const workersRaw = stripControlChars(formData.workers || '').trim();
 
     if (!nameVal) { setFeedback({ msg: 'Please enter your full name.', isError: true }); return; }
     if (!nameRe.test(nameVal)) { setFeedback({ msg: 'Name can only contain letters, spaces, hyphens, and apostrophes.', isError: true }); return; }
@@ -102,22 +110,48 @@ export default function Contact() {
       setFeedback({ msg: 'Please enter a valid email address.', isError: true });
       return;
     }
-
-    const payload = {
-      source: 'advancesafe.in',
-      name: nameVal,
-      designation: designationVal,
-      company: companyVal,
-      industry: industryVal,
-      phone: phoneVal,
-      city: cityVal,
-      email: emailVal || undefined,
-      workers: (formData.workers || '').trim(),
-      message: messageVal,
-    };
+    if (!workersRaw) {
+      setFeedback({ msg: 'Please enter approximate number of workers.', isError: true });
+      return;
+    }
+    if (!workersRe.test(workersRaw) || workersRaw.length > 20) {
+      setFeedback({
+        msg: 'Worker count should use numbers and simple separators only (e.g. 500 or 500–1000).',
+        isError: true,
+      });
+      return;
+    }
 
     setSubmitting(true);
     try {
+      let recaptchaToken = null;
+      if (isRecaptchaConfigured()) {
+        try {
+          recaptchaToken = await getRecaptchaToken('demo_request');
+        } catch {
+          setFeedback({
+            msg: 'Security verification failed. Please refresh the page and try again.',
+            isError: true,
+          });
+          setSubmitting(false);
+          return;
+        }
+      }
+
+      const payload = {
+        source: 'advancesafe.in',
+        name: nameVal,
+        designation: designationVal,
+        company: companyVal,
+        industry: industryVal,
+        phone: phoneVal,
+        city: cityVal,
+        email: emailVal || undefined,
+        workers: workersRaw,
+        message: messageVal,
+      };
+      if (recaptchaToken) payload.recaptchaToken = recaptchaToken;
+
       /* no-cors: only simple Content-Types are allowed; use text/plain + JSON string so the body is sent and Apps Script can parse e.postData.contents */
       await fetch(SCRIPT_URL, {
         method: 'POST',

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { BlogPostSchema } from '../components/SchemaMarkup';
 import { allPosts } from '../data/blogPosts';
+import { serializeJsonLd } from '../lib/jsonLd';
 
 function renderContentLine(line, i) {
   if (line.startsWith('## '))
@@ -54,7 +55,7 @@ export default function BlogPostPage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            __html: serializeJsonLd({
               '@context': 'https://schema.org',
               '@type': 'FAQPage',
               mainEntity: post.faq.map(({ q, a }) => ({
