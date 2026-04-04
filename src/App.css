@@ -1310,10 +1310,21 @@
       outline: none;
     }
     .blog-cta .blog-cta__input::placeholder { color: rgba(255,255,255,0.5); }
-    .blog-cta .btn { margin-left: 12px; }
+    .blog-cta__form {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .blog-cta .blog-cta__form .btn { margin-left: 0; }
+    .blog-cta__feedback {
+      margin: 20px auto 0;
+      max-width: 36rem;
+      text-align: left;
+    }
     @media (max-width: 520px) {
       .blog-cta .blog-cta__input { width: 100%; margin-bottom: 12px; }
-      .blog-cta .btn { margin-left: 0; }
     }
     /* Blog post page */
     .blog-post-hero {

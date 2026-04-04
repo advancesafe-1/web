@@ -12,6 +12,108 @@ const categories = [
   'EHS Management',
 ];
 
+const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NEWSLETTER_MAIL = 'advancesafesystem@gmail.com';
+
+function BlogNewsletterCta() {
+  const [email, setEmail] = useState('');
+  const [feedback, setFeedback] = useState({ msg: '', isError: false });
+  const [submitting, setSubmitting] = useState(false);
+  const formEndpoint = import.meta.env.VITE_NEWSLETTER_FORM_URL?.trim();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFeedback({ msg: '', isError: false });
+    const trimmed = email.trim();
+    if (!trimmed) {
+      setFeedback({ msg: 'Please enter your email address.', isError: true });
+      return;
+    }
+    if (trimmed.length > 254 || !emailRe.test(trimmed)) {
+      setFeedback({ msg: 'Please enter a valid email address.', isError: true });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      if (formEndpoint) {
+        const res = await fetch(formEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            email: trimmed,
+            _subject: 'AdvanceSafe blog newsletter signup',
+            source: 'advancesafe.in/blog',
+          }),
+        });
+        const data = res.ok ? await res.json().catch(() => ({})) : null;
+        if (!res.ok) throw new Error(data?.error || 'Request failed');
+        setFeedback({
+          msg: "Thanks — you're on the list. If the service asks you to confirm, check your inbox.",
+          isError: false,
+        });
+        setEmail('');
+      } else {
+        const subject = encodeURIComponent('AdvanceSafe blog newsletter subscription');
+        const body = encodeURIComponent(
+          `Please add this email to the industry safety newsletter:\n\n${trimmed}\n`
+        );
+        setFeedback({
+          msg: 'Opening your email app to send the request. If nothing opens, email us from the address you entered.',
+          isError: false,
+        });
+        setSubmitting(false);
+        window.setTimeout(() => {
+          window.location.href = `mailto:${NEWSLETTER_MAIL}?subject=${subject}&body=${body}`;
+        }, 150);
+        return;
+      }
+    } catch {
+      setFeedback({
+        msg: `Something went wrong. Email ${NEWSLETTER_MAIL} with subject “Newsletter” from the address you want subscribed.`,
+        isError: true,
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="blog-cta">
+      <h2 className="blog-cta__title">Stay Ahead in Industry Safety</h2>
+      <p className="blog-cta__sub">
+        Get weekly safety insights, ISO 45001 updates, and best practices delivered to your inbox.
+      </p>
+      <form className="blog-cta__form" onSubmit={handleSubmit} noValidate>
+        <input
+          type="email"
+          name="email"
+          placeholder="your@company.com"
+          className="blog-cta__input"
+          aria-label="Email for newsletter"
+          autoComplete="email"
+          maxLength={254}
+          value={email}
+          onChange={(ev) => setEmail(ev.target.value)}
+          disabled={submitting}
+        />
+        <button type="submit" className="btn btn--primary" disabled={submitting}>
+          {submitting ? 'Sending…' : 'Subscribe Free'}
+        </button>
+      </form>
+      {feedback.msg ? (
+        <p
+          className={`blog-cta__feedback form-feedback form-feedback--${feedback.isError ? 'error' : 'success'}`}
+          role="status"
+          aria-live="polite"
+        >
+          {feedback.msg}
+        </p>
+      ) : null}
+    </section>
+  );
+}
+
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -107,24 +209,7 @@ export default function BlogPage() {
           </section>
         )}
 
-        <section className="blog-cta">
-          <h2 className="blog-cta__title">Stay Ahead in Industry Safety</h2>
-          <p className="blog-cta__sub">
-            Get weekly safety insights, ISO 45001 updates, and best practices delivered to your
-            inbox.
-          </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <input
-              type="email"
-              placeholder="your@company.com"
-              className="blog-cta__input"
-              aria-label="Email for newsletter"
-            />
-            <button type="button" className="btn btn--primary">
-              Subscribe Free
-            </button>
-          </div>
-        </section>
+        <BlogNewsletterCta />
       </div>
     </div>
   );
