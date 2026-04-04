@@ -4,18 +4,30 @@ import { BlogPostSchema } from '../components/SchemaMarkup';
 import { allPosts } from '../data/blogPosts';
 import { serializeJsonLd } from '../lib/jsonLd';
 
+/** Renders **inline** bold in blog markdown lines */
+function parseInlineBold(text) {
+  if (text == null || !String(text).includes('**')) return text;
+  const parts = String(text).split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={idx}>{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+}
+
 function renderContentLine(line, i) {
   if (line.startsWith('## '))
-    return <h2 key={i}>{line.replace('## ', '')}</h2>;
+    return <h2 key={i}>{parseInlineBold(line.replace('## ', ''))}</h2>;
   if (line.startsWith('### '))
-    return <h3 key={i}>{line.replace('### ', '')}</h3>;
-  if (line.startsWith('**') && line.endsWith('**'))
+    return <h3 key={i}>{parseInlineBold(line.replace('### ', ''))}</h3>;
+  if (line.startsWith('**') && line.endsWith('**') && !line.slice(2, -2).includes('**'))
     return <p key={i} className="blog-article__strong">{line.replace(/\*\*/g, '')}</p>;
   if (line.startsWith('- '))
-    return <li key={i}>{line.replace('- ', '')}</li>;
+    return <li key={i}>{parseInlineBold(line.replace(/^- /, ''))}</li>;
   if (line.startsWith('| ')) return null;
   if (line.trim() === '') return <br key={i} />;
-  return <p key={i}>{line}</p>;
+  return <p key={i}>{parseInlineBold(line)}</p>;
 }
 
 export default function BlogPostPage() {
@@ -128,8 +140,8 @@ export default function BlogPostPage() {
             Ready to Transform Your Safety Management?
           </h3>
           <p className="blog-article-cta__sub">
-            See how AdvanceSafe helps industries achieve ISO 45001 compliance and zero-accident
-            targets.
+            See how AdvanceSafe helps plants strengthen ISO 45001–aligned safety workflows, live
+            monitoring, and audit-ready records.
           </p>
           <Link to="/" className="btn btn--primary">
             Get Free Demo →
