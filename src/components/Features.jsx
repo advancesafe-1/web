@@ -5,8 +5,16 @@ const features = [
   { title: 'Immutable Audit Trail', desc: 'Every event logged, timestamped, and locked. Cannot be edited. Legally defensible.', icon: 'audit' },
   { title: 'One-Click Compliance Reports', desc: 'Factory Act reports generated automatically. No manual compilation.', icon: 'report' },
   { title: 'Smart Alert Escalation', desc: 'Alert goes Supervisor → Manager → Plant Head → Emergency Services automatically if unacknowledged', icon: 'alert' },
-  { title: 'Contract Worker Tracking', desc: 'QR scan at gate instantly brings contract workers into your safety network', icon: 'contract' },
-  { title: 'Regional Language Alerts', desc: 'Hindi and Gujarati voice and text alerts for every worker', icon: 'lang' },
+  {
+    title: 'Contractor context',
+    desc: 'Where your site can share vendor or access data, contractor presence can sit alongside core monitoring—scope is agreed per deployment.',
+    icon: 'contract',
+  },
+  {
+    title: 'Localised supervisory alerts',
+    desc: 'Alert and dashboard wording for supervisors and the control room can be aligned to your language needs where your rollout includes it.',
+    icon: 'lang',
+  },
   { title: 'Universal Sensor Integration', desc: 'Gas, temperature, pressure, smoke, noise, vibration — connects to any sensor protocol', icon: 'sensor' },
 ];
 

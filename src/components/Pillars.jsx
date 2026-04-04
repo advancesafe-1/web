@@ -44,7 +44,8 @@ export default function Pillars() {
         </svg>
       ),
       law: 'Worker training, safety culture, communication, competency tracking',
-      deliver: 'Every worker gets a personal SOS button on their phone. Alerts in Hindi and Gujarati. Contract workers tracked from gate entry. Safety scores visible to every worker on their own app.',
+      deliver:
+        'Supervisors and the control room share one live picture—alerts, escalations, and audit-ready history—so training, toolbox talks, and follow-up stay tied to real plant conditions. Who receives what, and how messages are worded, is configured with you during deployment—not a separate mandatory worker app.',
     },
   ];
 

@@ -7,7 +7,7 @@ const steps = [
   {
     num: '02',
     title: 'Go Live',
-    desc: 'Your plant floor appears as a live map on the AdvanceSafe dashboard. Every zone shows a live safety score. Your team gets real-time alerts via Push, SMS, and WhatsApp — in the right language.',
+    desc: 'Your plant floor appears as a live map on the AdvanceSafe dashboard. Every zone shows a live safety score. Your team gets real-time alerts via the channels you configure (for example push, SMS, or WhatsApp).',
   },
   {
     num: '03',
