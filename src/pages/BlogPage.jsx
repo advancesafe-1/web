@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 
@@ -13,6 +13,8 @@ const categories = [
 ];
 
 export default function BlogPage() {
+  const [activeCategory, setActiveCategory] = useState('All');
+
   useEffect(() => {
     document.title = 'Industry Safety Blog — Expert Insights & Best Practices | AdvanceSafe';
     const meta = document.querySelector('meta[name="description"]');
@@ -23,8 +25,16 @@ export default function BlogPage() {
       );
   }, []);
 
-  const featuredPosts = blogPosts.filter((p) => p.featured);
-  const regularPosts = blogPosts.filter((p) => !p.featured);
+  const { featuredPosts, regularPosts } = useMemo(() => {
+    const filtered =
+      activeCategory === 'All'
+        ? blogPosts
+        : blogPosts.filter((p) => p.category === activeCategory);
+    return {
+      featuredPosts: filtered.filter((p) => p.featured),
+      regularPosts: filtered.filter((p) => !p.featured),
+    };
+  }, [activeCategory]);
 
   return (
     <div className="blog-page">
@@ -38,12 +48,14 @@ export default function BlogPage() {
             ISO 45001 guides, safety audit best practices, incident management strategies, and
             everything you need to build a world-class safety culture.
           </p>
-          <div className="blog-hero__pills">
+          <div className="blog-hero__pills" role="group" aria-label="Filter articles by category">
             {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
-                className={`blog-hero__pill ${cat === 'All' ? 'is-active' : ''}`}
+                className={`blog-hero__pill ${cat === activeCategory ? 'is-active' : ''}`}
+                aria-pressed={cat === activeCategory}
+                onClick={() => setActiveCategory(cat)}
               >
                 {cat}
               </button>
@@ -56,25 +68,44 @@ export default function BlogPage() {
         <p className="blog-disclaimer" role="note">
           <strong>Disclaimer:</strong> This blog is for general information and educational purposes only. Articles may reference industry practices and standards; we do not guarantee the accuracy or completeness of any statistics or third-party data. For compliance and safety decisions, consult qualified professionals and official regulations.
         </p>
-        <section className="blog-section">
-          <h2 className="blog-section__label">Featured Articles</h2>
-          <div className="blog-grid-featured">
-            {featuredPosts.map((post) => (
-              <FeaturedCard key={post.slug} post={post} />
-            ))}
-          </div>
-        </section>
+        {featuredPosts.length > 0 && (
+          <section className="blog-section">
+            <h2 className="blog-section__label">Featured Articles</h2>
+            <div className="blog-grid-featured">
+              {featuredPosts.map((post) => (
+                <FeaturedCard key={post.slug} post={post} />
+              ))}
+            </div>
+          </section>
+        )}
 
-        <hr className="blog-divider" />
+        {featuredPosts.length > 0 && regularPosts.length > 0 && <hr className="blog-divider" />}
 
-        <section className="blog-section">
-          <h2 className="blog-section__label blog-section__label--muted">Latest Articles</h2>
-          <div className="blog-grid-posts">
-            {regularPosts.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
-        </section>
+        {(regularPosts.length > 0 || (featuredPosts.length === 0 && activeCategory !== 'All')) && (
+          <section className="blog-section">
+            <h2 className="blog-section__label blog-section__label--muted">Latest Articles</h2>
+            {regularPosts.length > 0 ? (
+              <div className="blog-grid-posts">
+                {regularPosts.map((post) => (
+                  <PostCard key={post.slug} post={post} />
+                ))}
+              </div>
+            ) : (
+              <p className="blog-filter-empty" role="status">
+                {`No articles in “${activeCategory}” yet. Try another category or view All.`}
+              </p>
+            )}
+          </section>
+        )}
+
+        {activeCategory === 'All' && regularPosts.length === 0 && featuredPosts.length === 0 && (
+          <section className="blog-section">
+            <h2 className="blog-section__label blog-section__label--muted">Latest Articles</h2>
+            <p className="blog-filter-empty" role="status">
+              No articles to show.
+            </p>
+          </section>
+        )}
 
         <section className="blog-cta">
           <h2 className="blog-cta__title">Stay Ahead in Industry Safety</h2>
